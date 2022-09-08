@@ -17,10 +17,16 @@ const db = require('./db/database');
 const index = require('./routes/index');
 const hello = require('./routes/hello');
 const docs = require('./routes/docs');
+const create = require('./routes/create');
+const removeAll = require('./routes/remove-all');
+const save = require('./routes/save');
 
 app.use('/', index);
 app.use('/hello', hello);
 app.use('/docs', docs);
+app.use('/create', create);
+app.use('/remove-all', removeAll);
+app.use('/save', save);
 
 
 // don't show the log when it is test

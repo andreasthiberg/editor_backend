@@ -6,9 +6,8 @@ router.get('/', function(req, res, next) {
 
     (async () => {
         const db = await database.getDb();
-        const resultSet = await db.collection.find().toArray();
+        await db.collection.deleteMany();
         await db.client.close();
-        res.json(resultSet);
     })();
 });
 

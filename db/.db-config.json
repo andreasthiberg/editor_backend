@@ -1,4 +1,0 @@
-{
-    "dsn": "mongodb://localhost:27017/editor",
-    "collection": "documents"
-}

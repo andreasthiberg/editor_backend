@@ -5,8 +5,8 @@ textredigerare i frontend.
 
 För att använda API:t:
 
-1. Fyll  i korrekt URL till din databas, och rätt namn på din collection, i
-filen db/.db-config.json.
+1. Fyll  i korrekt URL till din databas (med användaruppgifter), och rätt namn på din collection, i
+variabeln dbConfig i filen databas.js.
 
 2. Installera alla nödvändiga moduler genom kommandot "npm install" i rotkatalogen.
 

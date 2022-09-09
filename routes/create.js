@@ -10,6 +10,7 @@ router.post('/', function(req, res, next) {
         const newId = result.insertedId;
         const newDocument = await db.collection.find({_id : newId}).toArray();
         await db.client.close();
+        console.log(newDocument);
         res.json(newDocument);
     })();
 });

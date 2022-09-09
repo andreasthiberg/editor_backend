@@ -18,7 +18,9 @@ const docs = require('./routes/docs');
 const create = require('./routes/create');
 const removeAll = require('./routes/remove-all');
 const save = require('./routes/save');
+const index = require('./routes/index');
 
+app.use('/', index);
 app.use('/docs', docs);
 app.use('/create', create);
 app.use('/remove-all', removeAll);
@@ -33,7 +35,6 @@ if (process.env.NODE_ENV !== 'test') {
 
 // Start up server
 app.listen(port, () => console.log(`Editor API listening on port ${port}!`));
-
 
 
 /* MIDDLEWARE */

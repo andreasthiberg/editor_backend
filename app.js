@@ -14,15 +14,11 @@ app.use(cors());
 const db = require('./db/database');
 
 /* Get route modules */
-const index = require('./routes/index');
-const hello = require('./routes/hello');
 const docs = require('./routes/docs');
 const create = require('./routes/create');
 const removeAll = require('./routes/remove-all');
 const save = require('./routes/save');
 
-app.use('/', index);
-app.use('/hello', hello);
 app.use('/docs', docs);
 app.use('/create', create);
 app.use('/remove-all', removeAll);
@@ -36,7 +32,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 // Start up server
-app.listen(port, () => console.log(`Example API listening on port ${port}!`));
+app.listen(port, () => console.log(`Editor API listening on port ${port}!`));
 
 
 

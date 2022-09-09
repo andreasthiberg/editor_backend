@@ -1,11 +1,12 @@
 // mongodb+srv://texteditor:<password>@cluster0.peuabyi.mongodb.net/?retryWrites=true&w=majority
 
 const mongo = require("mongodb").MongoClient;
-const collectionName = "documents";
+const dbConfig = require("./.db-config");
+const collectionName = dbConfig.collection;
 
 const database = {
     getDb: async function getDb () {
-        let dsn = `mongodb://localhost:27017/editor`;
+        let dsn = dbConfig.dsn;
 
         if (process.env.NODE_ENV === 'test') {
             dsn = "mongodb://localhost:27017/test";

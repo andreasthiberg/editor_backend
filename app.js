@@ -19,6 +19,7 @@ const create = require('./routes/create');
 const removeAll = require('./routes/remove-all');
 const save = require('./routes/save');
 const index = require('./routes/index');
+const e = require("express");
 
 app.use('/', index);
 app.use('/docs', docs);
@@ -34,7 +35,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 // Start up server
-app.listen(port, () => console.log(`Editor API listening on port ${port}!`));
+const server = app.listen(port, () => console.log(`Editor API listening on port ${port}!`));
 
 
 /* MIDDLEWARE */
@@ -63,3 +64,5 @@ app.use((err, req, res, next) => {
         ]
     });
 });
+
+module.exports = server;

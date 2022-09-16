@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
         const db = await database.getDb();
         await db.collection.deleteMany();
         await db.client.close();
+        res.send("Documents removed!");
     })();
 });
 

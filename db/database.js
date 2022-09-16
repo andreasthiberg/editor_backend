@@ -11,7 +11,10 @@ const database = {
     getDb: async function getDb () {
         let dsn = dbConfig.dsn;
         let collectionName = dbConfig.collection;
-
+ 
+        if (process.env.NODE_ENV === 'test') {
+            dsn = "mongodb://localhost:27017/test";
+        };
 
         const client  = await mongo.connect(dsn, {
             useNewUrlParser: true,
@@ -24,6 +27,7 @@ const database = {
         return {
             collection: collection,
             client: client,
+            db: db
         };
     }
 };

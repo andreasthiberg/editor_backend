@@ -6,6 +6,7 @@ const ObjectId = require('mongodb').ObjectId;
 router.post('/', function(req, res, next) {
 
     (async () => {
+        
         const db = await database.getDb();
         const filter = { _id: ObjectId(req.body["_id"]) };
         const updateDocument = { $set: { 
@@ -14,8 +15,9 @@ router.post('/', function(req, res, next) {
         }};
         await db.collection.updateOne(filter,updateDocument);
         await db.client.close();
-
+        res.send("Saved");
     })();
+
 });
 
 module.exports = router;

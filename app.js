@@ -9,23 +9,15 @@ const port = process.env.PORT || 1337;
 app.use(express.json());
 app.use(cors());
 
-/* Import database module */
-const db = require('./db/database');
 
 /* Get route modules */
 const docs = require('./routes/docs');
-const create = require('./routes/create');
-const removeAll = require('./routes/remove-all');
-const save = require('./routes/save');
 const index = require('./routes/index');
+const auth = require('./routes/auth');
 
 app.use('/', index);
 app.use('/docs', docs);
-app.use('/create', create);
-app.use('/remove-all', removeAll);
-app.use('/save', save);
-
-
+app.use('/auth', auth);
 
 // Web socket with socket.io
 const httpServer = require("http").createServer(app);

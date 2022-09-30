@@ -8,7 +8,7 @@ chai.should();
 
 chai.use(chaiHttp);
 
-const database = require("../db/database");
+const database = require("../models/database");
 const collectionName = "documents";
 
 describe('Documents', () => {

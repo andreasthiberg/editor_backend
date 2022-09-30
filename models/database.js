@@ -1,7 +1,8 @@
 require('dotenv').config();
 const dbConfig = {
     "dsn": `mongodb+srv://${process.env.ATLAS_USERNAME}:${process.env.ATLAS_PASSWORD}@cluster0.peuabyi.mongodb.net/editor`,
-    "collection": "documents"
+    "docsCollection": "documents",
+    "usersCollection": "users"
 }
 
 const mongo = require("mongodb").MongoClient;
@@ -10,10 +11,9 @@ const mongo = require("mongodb").MongoClient;
 const database = {
     getDb: async function getDb () {
         let dsn = dbConfig.dsn;
-        let collectionName = dbConfig.collection;
  
-        if (process.env.NODE_ENV === 'test') {
-            dsn = "mongodb://localhost:27017/test";
+        if (process.env.NODE_ENV === 'development') {
+            dsn = "mongodb://localhost:27017/editor";
         };
 
         const client  = await mongo.connect(dsn, {
@@ -22,10 +22,12 @@ const database = {
         });
 
         const db = await client.db();
-        const collection = await db.collection(collectionName);
+        const docsCollection = await db.collection(dbConfig.docsCollection);
+        const usersCollection = await db.collection(dbConfig.usersCollection);
 
         return {
-            collection: collection,
+            docsCollection: docsCollection,
+            usersCollection: usersCollection,
             client: client,
             db: db
         };

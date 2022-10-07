@@ -17,7 +17,7 @@ router.use((req,res,next) => {
             next();
         }
     });
-})
+}) 
 
 // Returns all documents.
 router.get('/', function(req, res) {

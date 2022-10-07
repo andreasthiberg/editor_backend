@@ -1,8 +1,20 @@
 const express = require("express");
 const morgan = require('morgan');
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
+/* GraphQL */
+const { graphqlHTTP }  = require('express-graphql');
+const { GraphQLSchema } = require("graphql");
+const visual = true;
+const RootQueryType = require("./graphql/root.js");
+const schema = new GraphQLSchema({
+    query: RootQueryType
+});
+
+
+/* Expess */
 const app = express();
 const port = process.env.PORT || 1337;
 
@@ -18,6 +30,26 @@ const auth = require('./routes/auth');
 app.use('/', index);
 app.use('/docs', docs);
 app.use('/auth', auth);
+
+
+
+/* Graphql route and middleware */
+const graphqlTokenMiddleware = (req, res, next) => {
+    const token = req.headers['x-access-token'];
+    console.log(token);
+    jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+        if (err) {
+            res.send(err);
+        } else {
+            next();
+        }
+    })
+}
+app.use('/graphql', graphqlTokenMiddleware, graphqlHTTP({
+    schema: schema,
+    graphiql: visual
+}));
+
 
 // Web socket with socket.io
 const httpServer = require("http").createServer(app);

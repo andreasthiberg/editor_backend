@@ -2,7 +2,8 @@ const {
     GraphQLObjectType,
     GraphQLString,
     GraphQLList,
-    GraphQLNonNull
+    GraphQLNonNull,
+    GraphQLInt
 } = require('graphql');
 
 const DocumentType = new GraphQLObjectType({
@@ -15,7 +16,20 @@ const DocumentType = new GraphQLObjectType({
         owner: { type: GraphQLNonNull(GraphQLString) },
         allowed_users: {
             type: new GraphQLList(GraphQLString)
+        },
+        comments: {
+            type: new GraphQLList(CommentType)
         }
+    })
+})
+
+
+const CommentType = new GraphQLObjectType({
+    name: 'Comment',
+    description: 'This represents a document comment',
+    fields: () => ({
+        row: { type: GraphQLNonNull(GraphQLInt) },
+        content: { type: GraphQLNonNull(GraphQLString) }
     })
 })
 

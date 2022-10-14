@@ -23,6 +23,22 @@ const documents = {
         } finally {
             await db.client.close();
         }
+    },
+    addUserToDocument: async function addUserToDocument(user,docId){
+        
+        const db = await database.getDb();
+        const filter = { _id: ObjectId(docId) };
+        const matchingDocs = await db.docsCollection.find(filter).toArray();
+        const previousDoc = matchingDocs[0];
+        const previousUsers = [...previousDoc.allowed_users];
+        previousUsers.push(user);
+        const updateDocument = { $set: {    
+            allowed_users: previousUsers
+        }};
+    
+        await db.docsCollection.updateOne(filter,updateDocument);
+        await db.client.close();
+        return;
     }
 };
 

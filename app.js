@@ -26,10 +26,12 @@ app.use(cors());
 const docs = require('./routes/docs');
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const email = require('./routes/email');
 
 app.use('/', index);
 app.use('/docs', docs);
 app.use('/auth', auth);
+app.use('/email', email);
 
 
 

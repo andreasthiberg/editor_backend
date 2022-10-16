@@ -18,6 +18,9 @@ router.use((req,res,next) => {
 
 // Send an email to register for document access
 router.post('/send', function(req, res) {
-    emailModel.sendEmail()
+    const email = req.body.email;
+    const id = req.body.id;
+    const name = req.body.name;
+    emailModel.sendEmail(email,id,name)
 });
 module.exports = router;

@@ -19,7 +19,8 @@ const DocumentType = new GraphQLObjectType({
         },
         comments: {
             type: new GraphQLList(CommentType)
-        }
+        },
+        mode: { type: GraphQLNonNull(GraphQLString) }
     })
 })
 

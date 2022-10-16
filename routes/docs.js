@@ -41,7 +41,8 @@ router.post('/create', function(req, res) {
             content: req.body.content,
             owner: req.body.owner,
             allowed_users: [req.body.owner],
-            comments: []
+            comments: [],
+            mode: req.body.mode
         }
         const result = await db.docsCollection.insertOne(newDocBody);
         const newId = result.insertedId;

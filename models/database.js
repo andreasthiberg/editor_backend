@@ -14,6 +14,8 @@ const database = {
  
         if (process.env.NODE_ENV === 'development') {
             dsn = "mongodb://localhost:27017/editor";
+        } else if (process.env.NODE_ENV === 'test') {
+            dsn = "mongodb://localhost:27017/test";
         };
 
         const client  = await mongo.connect(dsn, {

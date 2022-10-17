@@ -38,7 +38,6 @@ app.use('/email', email);
 /* Graphql route and middleware */
 const graphqlTokenMiddleware = (req, res, next) => {
     const token = req.headers['x-access-token'];
-    console.log(token);
     jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
         if (err) {
             res.send(err);

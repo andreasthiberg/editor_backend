@@ -21,6 +21,6 @@ router.post('/send', function(req, res) {
     const email = req.body.email;
     const id = req.body.id;
     const name = req.body.name;
-    emailModel.sendEmail(email,id,name)
+    const result = emailModel.sendEmail(email,id,name)
 });
 module.exports = router;

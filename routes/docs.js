@@ -2,6 +2,7 @@
 
 let express = require('express');
 const database = require('../models/database');
+const docModel = require('../models/documents')
 let router = express.Router();
 const jwt = require('jsonwebtoken');
 const ObjectId = require('mongodb').ObjectId;
@@ -86,22 +87,10 @@ router.post('/save', function(req, res) {
 router.post('/adduser', function(req, res) {
 
     (async () => {
-        
-        const db = await database.getDb();
-        const filter = { _id: ObjectId(req.body["id"]) };
-        console.log(await db.docsCollection.find(filter).toArray())
-        const matchingDocs = await db.docsCollection.find(filter).toArray();
-        const previousDoc = matchingDocs[0];
-        const previousUsers = [...previousDoc.allowed_users];
-        previousUsers.push(req.body["user"]);
-        
-        const updateDocument = { $set: {    
-            allowed_users: previousUsers
-        }};
 
-        await db.docsCollection.updateOne(filter,updateDocument);
-        await db.client.close();
+        await docModel.addUserToDocument(req.body.user,req.body.id)
         res.send("Saved");
+        
     })();
 
 });
@@ -134,12 +123,10 @@ router.post('/addcomment', function(req, res) {
 });
 
 function copyObjectArray(arr){
-    console.log(arr)
     let newArray = [];
     for (i in arr){
         newArray.push({...arr[i]})
     }
-    console.log(newArray)
     return newArray
 }
 

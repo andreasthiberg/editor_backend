@@ -9,8 +9,8 @@ const email = {
             to: email, // Change to your recipient
             from: 'anth21@student.bth.se', // Change to your verified sender
             subject: 'Inbjudan att redigera dokument ' + name,
-            text: `http://localhost:3000/?regId=${docId}&name=${name}`,
-            html: `http://localhost:3000/?regId=${docId}&name=${name}`,
+            text: `http://www.student.bth.se/~anth21/editor/?regId=${docId}&name=${name}`,
+            html: `http://www.student.bth.se/~anth21/editor/?regId=${docId}&name=${name}`,
           }
           await sgMail
             .send(msg)

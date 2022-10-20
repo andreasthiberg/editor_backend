@@ -1,4 +1,5 @@
 const database = require("./database.js");
+const ObjectId = require('mongodb').ObjectId;
 
 const documents = {
     getAll: async function getAll() {

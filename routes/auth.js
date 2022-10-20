@@ -2,6 +2,7 @@
 
 let express = require('express');
 const database = require('../models/database');
+const userModel = require('../models/users');
 let router = express.Router();
 
 /* Auth stuff */
@@ -73,15 +74,12 @@ router.post('/login', function(req, res) {
 router.get('/users', function(req, res) {
 
     (async () => {
-        const db = await database.getDb();
-        const resultSet = await db.usersCollection.find().toArray();
-        await db.client.close();
+        let users = await userModel.getAll()
         let emailsOnly = [];
-        for(let index in resultSet){
-            emailsOnly.push({email:resultSet[index].email})
+        for(let index in users){
+            emailsOnly.push({email:users[index].email})
         }
         res.json({users:emailsOnly});
-
     })();
 
 });
